@@ -28,10 +28,8 @@ You can also adjust the length of song and tempo in `song_settings.json`.
 
 | Parameter  | Description |
 | ------------- | ------------- |
-| `notes`  | Defines the notes used for composition.  |
 | `interval_upper`  | Defines the upper bound of interval of notes. The values in this list will be randomly chosen.  |
 | `interval_lower`  | Defines the lower bound of interval of notes. The values in this list will be randomly chosen.  |
-| `rhythm`  | Defines rhythm pattern for melody. The numbers are in beats (quarter notes).  |
 | `seq_chord` | Defines the chord sequence. Notes in each sub-array will be played simultaneously to form a chord.  |
 | `seq_perc` | Defines the percussion sequence. The first element in the sub-array denotes the drum sound, and the second element denotes time value in beats.  |
 | `velocity` | Defines the velocity of strong, intermediate and weak beats.  |

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import random
 
 from midiutil.MidiFile import MIDIFile
 
@@ -16,11 +17,47 @@ class Masterpiece(object):
         rules_file = open(rules_path, "r")
         rules = json.load(rules_file)
         rules_file.close()
-        self.rhythm = rules["rhythm"]
+
+        rhythm = []
+        for i in range(1, 9):
+            melody = []
+
+            while len(melody) < 8:
+                ran = random.uniform(1.5, 2.5)
+                if ran <= 1.7:
+                    melody.append(2.0)
+                elif ran <= 2.1:
+                    melody.append(1.0)
+                elif ran <= 2.45:
+                    if(len(melody) == 7):
+                        melody.append(1)
+                    else:
+                        melody.append(0.5)
+                        melody.append(0.5)
+                elif ran <= 2.5:
+                    if(len(melody) <= 5):
+                        melody.append(0.25)
+                        melody.append(0.25)
+                        melody.append(0.25)
+                        melody.append(0.25)
+                    if(len(melody) <= 7):
+                        melody.append(0.25)
+                        melody.append(0.25)
+
+            rhythm.append(melody)
+
+        self.rhythm = rhythm
         self.seq_chord = rules["seq_chord"]
         self.seq_perc = rules["seq_perc"]
         self.velocity = rules["velocity"]
-        self.rn = RandomNote(rules["notes"], rules["interval_upper"], rules["interval_lower"])
+
+        scales = []
+        for i in range(60, 72):
+            scales.append([i, i+2, i+4, i+5, i+7, i+9, i+11]) # Major
+            scales.append([i, i+2, i+3, i+5, i+7, i+8, i+10]) # Minor
+
+        notes = random.choice(scales)
+        self.rn = RandomNote(notes, rules["interval_upper"], rules["interval_lower"])
 
         self.MyMIDI = MIDIFile(3)
         self.current_track_number = 0
